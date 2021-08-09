@@ -2,6 +2,7 @@ package com.jpabook.jpashop.repository;
 
 import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
+import com.jpabook.jpashop.domain.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -30,11 +31,10 @@ public class OrderRepository {
     /**
      * JPQL 이용 동적 쿼리
      */
-    public List<Order> findAllByQueryString(OrderSearch orderSearch) {
-
-        String jpql = "select o from Order o join o.member m";
+    public List<Order> findAllByString(OrderSearch orderSearch) {
+        //language=JPAQL
+        String jpql = "select o From Order o join o.member m";
         boolean isFirstCondition = true;
-
         //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
             if (isFirstCondition) {
